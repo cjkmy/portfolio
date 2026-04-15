@@ -15,8 +15,8 @@ const navLinks = $$("nav a");
 let pages = [
     { url: '', title: 'Home' },
     { url: 'projects/', title: 'Projects' },
-    { url: 'projects/', title: 'Resume' },
-    { url: 'projects/', title: 'Contact' },
+    { url: 'resume/', title: 'Resume' },
+    { url: 'resume/', title: 'Contact' },
 ];
 
 let nav = document.createElement('nav');
@@ -25,5 +25,5 @@ document.body.prepend(nav);
 for (let p of pages) {
     let url = p.url;
     let title = p.title;
-    nav.insertAdjacentHTML('beforeend', '<a href="${url}">${title}</a>');
+    nav.insertAdjacentHTML('beforeend', `<a href="${url}">${title}</a>`);
 }
