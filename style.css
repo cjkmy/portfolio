@@ -1,5 +1,5 @@
 html {
-  --color-accent: oklch(55.43% 0.19766 271.185);
+  --color-accent: oklch(92.268% 0.1029 152.987);
   accent-color: var(--color-accent);
 }
 
@@ -32,7 +32,7 @@ nav a.current {
 
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
-  background-color: #f0f0f0; /* or a valid lighter oklch color */
+  background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
 }
 
 form {
@@ -66,4 +66,28 @@ button {
 
 .projects article h2 {
   margin: 0;
+}
+
+html {
+  color-scheme: light dark;
+}
+
+nav {
+  --border-color: oklch(50% 10% 200 / 40%);
+}
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+
+  font-size: 80%;
+  font-family: inherit;
+}
+
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
 }
