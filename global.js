@@ -91,7 +91,7 @@ form?.addEventListener('submit', function (event) {
     location.href = url;
 });
 
-#lab 4
+
 export async function fetchJSON(url) {
   try {
     // Fetch the JSON file from the given URL
