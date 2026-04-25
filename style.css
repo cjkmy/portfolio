@@ -94,19 +94,19 @@ select {
 
 #profile-stats dl {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 equal columns */
+  grid-template-columns: repeat(4, 1fr); 
   gap: 0.5rem;
   text-align: center;
 }
 
 #profile-stats dt {
-  grid-row: 1; /* force all labels to row 1 */
+  grid-row: 1; 
   font-weight: bold;
 }
 
 #profile-stats dd {
-  grid-row: 2; /* force all values to row 2 */
-  margin: 0;   /* remove default spacing */
+  grid-row: 2; 
+  margin: 0;  
 }
 
 .projects img {
