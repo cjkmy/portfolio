@@ -1,9 +1,12 @@
+
 import { fetchJSON, renderProjects } from '../global.js';
 
-const projects = await fetchJSON('../lib/projects.json');
+const BASE_PATH =
+  location.hostname === 'localhost' || location.hostname === '127.0.0.1'
+    ? '../'
+    : '/portfolio/';
+
+const projects = await fetchJSON(`${BASE_PATH}lib/projects.json`);
 const containerElement = document.querySelector('.projects');
 
 renderProjects(projects, containerElement, 'h2');
-
-const titleElement = document.querySelector('.projects-title');
-titleElement.textContent = `Projects (${projects.length})`;
