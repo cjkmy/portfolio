@@ -17,16 +17,14 @@ let query = '';
 
 renderProjects(projects, containerElement, 'h2');
 
-function getFilteredProjects() {
+function getFilteredProjects() { //extra credit helper :D focuses on search bar
   let filteredProjects = projects;
-
   if (query) {
     filteredProjects = filteredProjects.filter((project) => {
       const values = Object.values(project).join('\n').toLowerCase();
       return values.includes(query.toLowerCase());
     });
   }
-
   return filteredProjects;
 }
 
@@ -66,20 +64,17 @@ function renderPieChart(projectsGiven) {
     .attr('class', (_, i) => selectedIndex === i ? 'selected' : '')
     .on('click', (_, d) => {
       const i = arcData.indexOf(d);
-
       selectedIndex = selectedIndex === i ? -1 : i;
 
-      let filteredProjects = getFilteredProjects();
-
+      let filteredProjects = getFilteredProjects(); //helper was used (for the search bar)
       if (selectedIndex !== -1) {
         const selectedYear = data[selectedIndex].label;
         filteredProjects = filteredProjects.filter((project) => {
           return project.year === selectedYear;
         });
       }
-
       renderProjects(filteredProjects, containerElement, 'h2');
-      renderPieChart(getFilteredProjects());
+      renderPieChart(getFilteredProjects()); /// modified to use BOTH :D
     });
 
   legend
