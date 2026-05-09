@@ -3,18 +3,24 @@ html {
   accent-color: var(--color-accent);
 }
 
+html {
+  color-scheme: light dark;
+}
+
 body {
   font: 100%/1.5 system-ui;
   max-width: 100ch;
   margin-inline: auto;
 }
 
-nav ul, nav li {
+nav ul,
+nav li {
   display: contents;
 }
 
 nav {
   display: flex;
+  --border-color: oklch(50% 10% 200 / 40%);
 }
 
 nav a {
@@ -33,6 +39,21 @@ nav a.current {
 nav a:hover {
   border-bottom: 0.4em solid var(--color-accent);
   background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
+}
+
+.color-scheme {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  font-size: 80%;
+  font-family: inherit;
+}
+
+input,
+textarea,
+button,
+select {
+  font-family: inherit;
 }
 
 form {
@@ -68,47 +89,6 @@ button {
   margin: 0;
 }
 
-html {
-  color-scheme: light dark;
-}
-
-nav {
-  --border-color: oklch(50% 10% 200 / 40%);
-}
-
-.color-scheme {
-  position: absolute;
-  top: 1rem;
-  right: 1rem;
-
-  font-size: 80%;
-  font-family: inherit;
-}
-
-input,
-textarea,
-button,
-select {
-  font-family: inherit;
-}
-
-#profile-stats dl {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr); 
-  gap: 0.5rem;
-  text-align: center;
-}
-
-#profile-stats dt {
-  grid-row: 1; 
-  font-weight: bold;
-}
-
-#profile-stats dd {
-  grid-row: 2; 
-  margin: 0;  
-}
-
 .projects img {
   width: 100%;
   max-width: 300px;
@@ -119,13 +99,38 @@ select {
   color: gray;
   font-size: 0.9rem;
   margin-top: 0.25rem;
+}
 
+#profile-stats dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  text-align: center;
+}
+
+#profile-stats dt {
+  grid-row: 1;
+  font-weight: bold;
+}
+
+#profile-stats dd {
+  grid-row: 2;
+  margin: 0;
 }
 
 #projects-pie-plot {
   max-width: 20em;
   margin-block: 2em;
   overflow: visible;
+}
+
+#projects-pie-plot path {
+  transition: 300ms;
+  cursor: pointer;
+}
+
+#projects-pie-plot:has(path:hover) path:not(:hover) {
+  opacity: 0.5;
 }
 
 .container {
@@ -161,25 +166,98 @@ select {
 }
 
 .searchBar {
-  width: 300px;      /* makes it wider */
-  height: 40px;      /* makes it taller */
-  font-size: 16px;   /* bigger text inside */
-  padding: 8px 12px; /* space inside the box */
+  width: 300px;
+  height: 40px;
+  font-size: 16px;
+  padding: 8px 12px;
 }
 
-#projects-pie-plot path {
-  transition: 300ms;
-  cursor: pointer;
+/* GRIDLINES */
+
+.gridlines line {
+  stroke: #ccc;
+  stroke-opacity: 0.3;
 }
 
-#projects-pie-plot:has(path:hover) path:not(:hover) {
-  opacity: 0.5;
+.gridlines path {
+  display: none;
 }
 
-.selected {
-  --color: oklch(60% 45% 0) !important;
+/* TOOLTIP */
+
+dl.info {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.5em 1em;
+  margin: 0;
+  padding: 1em;
+  transition-duration: 500ms;
+  transition-property: opacity, visibility;
 }
 
-.selected:is(path) {
-  fill: var(--color);
+dl.info dt {
+  font-weight: bold;
+  color: #666;
+}
+
+dl.info dd {
+  margin: 0;
+}
+
+dl.info[hidden]:not(:hover, :focus-within) {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.tooltip {
+  position: fixed;
+  top: 1em;
+  left: 1em;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  backdrop-filter: blur(6px);
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* DOTS */
+
+circle {
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle:hover {
+  transform: scale(1.5);
+}
+
+/* BRUSH SELECTION */
+
+@keyframes marching-ants {
+  to {
+    stroke-dashoffset: -8;
+  }
+}
+
+.selection {
+  fill-opacity: 0.1;
+  stroke: black;
+  stroke-opacity: 0.7;
+  stroke-dasharray: 5 3;
+  animation: marching-ants 2s linear infinite;
+}
+
+/* SELECTED DOTS */
+
+circle {
+  fill: steelblue;
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+}
+
+circle.selected {
+  fill: #ff6b6b;
 }

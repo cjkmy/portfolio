@@ -30,6 +30,7 @@ let pages = [
     { url: 'projects/', title: 'Projects' },
     { url: 'resume/', title: 'Resume' },
     { url: 'contact/', title: 'Contact' },
+    { url: 'meta/', title: 'Meta' },
 ];
 
 const BASE_PATH = (location.hostname === "localhost" || location.hostname === "127.0.0.1")
