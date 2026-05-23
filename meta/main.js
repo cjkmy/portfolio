@@ -428,6 +428,15 @@ function onStepEnter(response) {
 
   filteredCommits = commits.filter((d) => d.datetime <= commitMaxTime);
 
+  document.querySelector('#commit-progress').value =
+    timeScale(commitMaxTime);
+
+  document.querySelector('#commit-time-display').textContent =
+    commitMaxTime.toLocaleString('en', {
+      dateStyle: 'long',
+      timeStyle: 'short',
+    });
+
   renderCommitInfo(data, filteredCommits);
   updateScatterPlot(data, filteredCommits);
   updateFileDisplay(filteredCommits);
@@ -468,3 +477,6 @@ document
   .addEventListener('input', onTimeSliderChange);
 
 onTimeSliderChange();
+
+console.log('commits:', commits.length);
+console.log('steps:', document.querySelectorAll('.step').length);
