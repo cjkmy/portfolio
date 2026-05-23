@@ -223,8 +223,23 @@ dl.info[hidden]:not(:hover, :focus-within) {
 
 /* DOTS */
 
+circle {
+  fill: steelblue;
+  transition: 200ms;
+  transform-origin: center;
+  transform-box: fill-box;
+
+  @starting-style {
+    r: 0;
+  }
+}
+
 circle:hover {
   transform: scale(1.5);
+}
+
+circle.selected {
+  fill: #ff6b6b;
 }
 
 /* BRUSH SELECTION */
@@ -243,21 +258,7 @@ circle:hover {
   animation: marching-ants 2s linear infinite;
 }
 
-/* SELECTED DOTS */
-
-circle {
-  fill: steelblue;
-  transition: 200ms;
-  transform-origin: center;
-  transform-box: fill-box;
-  @starting-style {
-    r: 0;
-  }
-}
-
-circle.selected {
-  fill: #ff6b6b;
-}
+/* FILE DISPLAY */
 
 #files {
   display: grid;
@@ -298,14 +299,14 @@ circle.selected {
   border-radius: 50%;
 }
 
-#scrolly-1 {
-  position: relative;
-  display: flex;
-  gap: 1rem;
-}
+/* SCROLLYTELLING */
 
-#scrolly-1 > * {
-  flex: 1;
+#scrolly-1 {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 1.5rem;
+  align-items: start;
+  margin-top: 2rem;
 }
 
 #scatter-story {
@@ -314,10 +315,19 @@ circle.selected {
 
 #scatter-plot {
   position: sticky;
-  top: 0;
-  height: 50vh;
+  top: 1rem;
+  align-self: start;
+}
+
+#chart svg {
+  width: 100%;
+  max-width: 700px;
+  max-height: 300px;
 }
 
 .step {
-  padding-bottom: 80vh;
+  min-height: 20vh;
+  padding: 0.5rem 0;
+  margin-bottom: 1rem;
+  line-height: 1.5;
 }
